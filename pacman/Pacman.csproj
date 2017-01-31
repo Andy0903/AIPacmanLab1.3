@@ -45,6 +45,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BinaryDecisionTree.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Character\BlueGhost.cs" />
     <Compile Include="Character\Ghost.cs" />

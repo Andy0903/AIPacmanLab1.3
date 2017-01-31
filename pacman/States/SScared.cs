@@ -11,20 +11,20 @@ namespace Pacman
             Console.WriteLine("Entered SCARED");
         }
 
+        //public void Execute(Ghost aGhost)
+        //{
+        //    if (aGhost.CollisionWithPlayer())
+        //    {
+        //        aGhost.ChangeState(new SDead());
+        //    }
+
+        //    if (aGhost.Player.PowerUp != PowerUpType.GhostEater)
+        //    {
+        //        aGhost.ChangeState(new SAlive());
+        //    }
+        //}
+
         public void Execute(Ghost aGhost)
-        {
-            if (aGhost.CollisionWithPlayer())
-            {
-                aGhost.ChangeState(new SDead());
-            }
-
-            if (aGhost.Player.PowerUp != PowerUpType.GhostEater)
-            {
-                aGhost.ChangeState(new SAlive());
-            }
-        }
-
-        public void ExecuteGraphics(Ghost aGhost)
         {
             aGhost.FrameYIndex = 4;
 

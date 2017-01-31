@@ -11,21 +11,26 @@ namespace Pacman
             Console.WriteLine("Entered ALIVE");
         }
 
+        //public void Execute(Ghost aGhost)
+        //{
+        //    if (aGhost.Player.PowerUp == PowerUpType.GhostEater)
+        //    {
+        //        aGhost.ChangeState(new SScared());
+        //    }
+
+        //    if (aGhost.CollisionWithPlayer())
+        //    {
+        //        aGhost.Player.GotEaten();
+        //    }
+        //}
+
         public void Execute(Ghost aGhost)
         {
-            if (aGhost.Player.PowerUp == PowerUpType.GhostEater)
-            {
-                aGhost.ChangeState(new SScared());
-            }
-
             if (aGhost.CollisionWithPlayer())
             {
                 aGhost.Player.GotEaten();
             }
-        }
 
-        public void ExecuteGraphics(Ghost aGhost)
-        {
             aGhost.FrameYIndex = aGhost.DEFAULT_FRAME_Y_INDEX;
             switch (aGhost.Direction)
             {

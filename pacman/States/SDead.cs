@@ -12,15 +12,15 @@ namespace Pacman
             SoundEffectManager.PlayGhostSound();
         }
 
-        public void Execute(Ghost aGhost)
-        {
-            if (aGhost.Position == aGhost.SpawnPosition)
-            {
-                aGhost.ChangeState(new SAlive());
-            }
-        }
+        //public void Execute(Ghost aGhost)
+        //{
+        //    if (aGhost.Position == aGhost.SpawnPosition)
+        //    {
+        //        aGhost.ChangeState(new SAlive());
+        //    }
+        //}
 
-        public void ExecuteGraphics(Ghost aGhost)
+        public void Execute(Ghost aGhost)
         {
             aGhost.FrameYIndex = 4;
             switch (aGhost.Direction)

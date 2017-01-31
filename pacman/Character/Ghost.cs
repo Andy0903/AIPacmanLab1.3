@@ -9,8 +9,9 @@ namespace Pacman
     {
         #region Member variables
         //GhostHealthState myGhostHealthState;
-        IGhostState myCurrentBehaviour;
+        public IGhostState CurrentBehaviour { get; private set; }
         public readonly int DEFAULT_FRAME_Y_INDEX;
+        BinaryDecisionTree myDecisionTree;
         #endregion
 
         #region Properties
@@ -33,13 +34,14 @@ namespace Pacman
         {
             DEFAULT_FRAME_Y_INDEX = aDefaultFrameYIndex;
             InitializeMemberVariables(aPlayer, aColor);
+            myDecisionTree = new BinaryDecisionTree(this);
         }
         #endregion
 
         #region Public methods
         public override void Reset()
         {
-            SetDefaultNonParameterMemberVariables();
+            //SetDefaultNonParameterMemberVariables();
             base.Reset();
         }
 
@@ -47,7 +49,8 @@ namespace Pacman
         {
             //UpdateHealthState();
             //Collision();
-            myCurrentBehaviour.Execute(this);
+            // CurrentBehaviour.Execute(this);
+            ChangeState(myDecisionTree.Traverse());
             base.Update(aGameTime);
         }
         #endregion
@@ -66,7 +69,7 @@ namespace Pacman
             //}
             //return null;
 
-            return myCurrentBehaviour.FindPath(this);
+            return CurrentBehaviour.FindPath(this);
         }
 
         public Vector2? AvoidPosition(Vector2 aPosition)
@@ -147,7 +150,7 @@ namespace Pacman
                 //        ChangeSourceRectangleDead();
                 //        break;
                 //}
-                myCurrentBehaviour.ExecuteGraphics(this);
+                CurrentBehaviour.Execute(this);
             }
         }
         #endregion
@@ -165,19 +168,22 @@ namespace Pacman
             Color = aColor;
         }
 
-        private void SetDefaultNonParameterMemberVariables()
-        {
-            //myGhostHealthState = GhostHealthState.Alive;
-            ChangeState(new SAlive());
-        }
+        //private void SetDefaultNonParameterMemberVariables()
+        //{
+        //    //myGhostHealthState = GhostHealthState.Alive;
+        //    //ChangeState(new SAlive());
+            
+        //}
 
         public void ChangeState(IGhostState aState)
         {
-            if (myCurrentBehaviour != null)
+            if (CurrentBehaviour == aState) { return; }
+
+            if (CurrentBehaviour != null)
             {
-                myCurrentBehaviour.Exit(this);
+                CurrentBehaviour.Exit(this);
             }
-            myCurrentBehaviour = aState;
+            CurrentBehaviour = aState;
             aState.Enter(this);
         }
 
